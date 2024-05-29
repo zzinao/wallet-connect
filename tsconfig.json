@@ -18,7 +18,15 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@*": ["*"],
+      "@utils": ["utils/*"],
+      "@store": ["store/*"],
+      "@hooks": ["hooks/*"],
+      "@context": ["context/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules"],
