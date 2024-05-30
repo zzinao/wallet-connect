@@ -10,6 +10,7 @@ const WalletConnect = () => {
   const [uri, setUri] = useState('');
   const { web3Wallet, address } = useWalletContext();
   const { session } = useSnapshot(SessionStore.state);
+  console.log('ADDRESS:', address);
 
   const onPair = async () => {
     const { topic: paringTopic } = parseUri(uri);
@@ -66,7 +67,7 @@ const WalletConnect = () => {
           placeholder="Enter Wallet Connect URI"
           className="w-[400px]"
         />
-        <Button variant="contained" onClick={onPair}>
+        <Button variant="contained" onClick={onPair} disabled={!address}>
           pair
         </Button>
       </Box>

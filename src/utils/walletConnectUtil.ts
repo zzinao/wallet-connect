@@ -5,7 +5,10 @@ import { ethers } from 'ethers';
 export const createWeb3Wallet = async () => {
   const projectId = import.meta.env.VITE_PROJECT_ID as string;
 
-  if (!projectId) return;
+  if (!projectId) {
+    console.error('projectId가 없습니다');
+    return;
+  }
 
   const core = new Core({
     projectId,
@@ -28,13 +31,17 @@ export const createWeb3Wallet = async () => {
 export const generateAccount = () => {
   let privateKey = localStorage.getItem('WALLET_PRIVATE_KEY') as `0x${string}` | undefined;
 
-  if (!privateKey) {
-    const randomWallet = ethers.Wallet.createRandom();
-    localStorage.setItem('WALLET_PRIVATE_KEY', randomWallet.privateKey);
-    const wallet = new ethers.Wallet(randomWallet.privateKey);
-    return wallet;
-  } else {
-    const wallet = new ethers.Wallet(privateKey);
-    return wallet;
+  try {
+    if (!privateKey) {
+      const randomWallet = ethers.Wallet.createRandom();
+      localStorage.setItem('WALLET_PRIVATE_KEY', randomWallet.privateKey);
+      const wallet = new ethers.Wallet(randomWallet.privateKey);
+      return wallet;
+    } else {
+      const wallet = new ethers.Wallet(privateKey);
+      return wallet;
+    }
+  } catch (error) {
+    console.log(error, 'error');
   }
 };

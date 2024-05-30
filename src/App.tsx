@@ -9,10 +9,10 @@ import WalletConnect from '@components/WalletConnect';
 function App() {
   const { initialized, web3Wallet, walletData } = useWalletInitalize();
 
-  useWalletConnectEventsManager(initialized, walletData?.web3Wallet!);
+  useWalletConnectEventsManager(initialized, web3Wallet!);
 
   useEffect(() => {
-    if (!initialized || !walletData) return;
+    if (!initialized || !web3Wallet) return;
     web3Wallet?.core.relayer.on(RELAYER_EVENTS.connect, () => {
       console.log('Network connection is restored!', 'success');
     });
@@ -23,7 +23,7 @@ function App() {
   }, [initialized]);
 
   return (
-    <WalletStateContext {...walletData}>
+    <WalletStateContext web3Wallet={web3Wallet} {...walletData}>
       <WalletConnect />
       <Modal />
     </WalletStateContext>

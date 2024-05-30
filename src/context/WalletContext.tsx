@@ -11,12 +11,7 @@ interface WalletContextType {
 export const WalletContext = createContext<WalletContextType | undefined>(undefined);
 
 const WalletStateContext = (props: React.PropsWithChildren<WalletContextType>) => {
-  const contextValue = useMemo(
-    () => ({
-      ...props,
-    }),
-    [props]
-  );
+  const contextValue = useMemo(() => ({ ...props }), [props]);
 
   return <WalletContext.Provider value={contextValue}>{props.children}</WalletContext.Provider>;
 };

@@ -4,7 +4,6 @@ import { IWeb3Wallet } from '@walletconnect/web3wallet';
 import { ethers } from 'ethers';
 
 export interface WalletDataType {
-  web3Wallet: IWeb3Wallet;
   wallet: ethers.Wallet;
   address: string;
 }
@@ -17,10 +16,10 @@ const useWalletInitalize = () => {
   const init = async () => {
     const web3WalletInstance = await createWeb3Wallet();
     const wallet = generateAccount();
+    console.log('WALLET: ', wallet);
 
     if (web3WalletInstance && wallet) {
       setWalletData({
-        web3Wallet: web3WalletInstance,
         wallet,
         address: wallet.address,
       });
