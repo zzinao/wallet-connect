@@ -1,4 +1,3 @@
-import { mainnet } from 'wagmi/chains';
 import { useSnapshot } from 'valtio';
 import { Avatar, Box, Button, Typography } from '@mui/material';
 import { buildApprovedNamespaces, getSdkError } from '@walletconnect/utils';
@@ -10,7 +9,7 @@ import SessionStore from '@store/SessionStore';
 const SessionProposalModal = () => {
   const { web3Wallet, wallet } = useWalletContext();
   const { data } = useSnapshot(ModalStore.state);
-  const chain = mainnet;
+  const chain = { id: 1 };
 
   const onReject = useCallback(async () => {
     if (data?.proposal) {
